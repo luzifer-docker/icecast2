@@ -1,12 +1,12 @@
 From ubuntu:14.04
 MAINTAINER Knut Ahlers <knut@ahlers.me>
 
-RUN apt-get update && \
-    apt-get install -y icecast2
+RUN apt-get update \
+ && DEBCONF_FRONTEND=noninteractive apt-get install -y icecast2
 
-VOLUME /etc/icecast2/icecast.xml
+VOLUME /config
 EXPOSE 8000 8001
 
-USER icecast2
+ADD startup.sh /usr/bin/startup.sh
 
-ENTRYPOINT ["/usr/bin/icecast2", "-c", "/etc/icecast2/icecast.xml"]
+ENTRYPOINT ["/bin/bash", "/usr/bin/startup.sh"]
