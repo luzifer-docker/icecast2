@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/usr/bin/dumb-init /bin/bash
+set -euxo pipefail
 
 # Copy default config to /config if not existent
 if ! [ -e /config/icecast.xml ]; then
-  cp /etc/icecast2/icecast.xml /config/icecast.xml
-  chown icecast2 /config/icecast.xml
+	cp /etc/icecast.xml /config/icecast.xml
+	chown icecast /config/icecast.xml
 fi
 
 # Hand over to icecast
-sudo -u icecast2 /usr/bin/icecast2 -c /config/icecast.xml
+exec gosu icecast /usr/bin/icecast -c /config/icecast.xml
