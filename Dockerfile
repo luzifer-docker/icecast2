@@ -15,9 +15,7 @@ RUN set -ex \
  && curl -sSfLo /usr/bin/gosu "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64" \
  && chmod 0755 \
       /usr/bin/dumb-init \
-      /usr/bin/gosu \
- && apk --no-cache del \
-      curl
+      /usr/bin/gosu
 
 VOLUME /config
 EXPOSE 8000 8001
