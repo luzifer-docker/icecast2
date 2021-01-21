@@ -25,3 +25,6 @@ EXPOSE 8000 8001
 ADD startup.sh /usr/bin/startup.sh
 
 ENTRYPOINT ["/usr/bin/startup.sh"]
+
+# healthcheck
+HEALTHCHECK CMD curl -sL --fail localhost:8000 || exit 1
